@@ -5,10 +5,26 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const engine = require("ejs-mate");
 const methodOverride = require("method-override");
+const mongoose = require("mongoose");
 
 const apiRouter = require("./routes/index");
 
 const app = express();
+
+// connecting MongoDB
+const dbURI =
+    process.env.DB_CONNECTION || "mongodb://localhost:27017/travelzilla";
+
+mongoose
+    .connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log("connected to db");
+    })
+    .catch((err) => console.log("something is WORNG --- " + err.message));
 
 // use ejs-locals for all ejs templates:
 app.engine("ejs", engine);
