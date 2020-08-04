@@ -3,11 +3,15 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const engine = require("ejs-mate");
+const methodOverride = require("method-override");
 
-const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/index");
 
 const app = express();
 
+// use ejs-locals for all ejs templates:
+app.engine("ejs", engine);
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -17,9 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
 
 // mounting routes
-app.use("/", indexRouter);
+app.use("/api", apiRouter);
+/* GET home page. */
+app.get("/", (req, res, next) => {
+    res.render("index", { title: "Express" });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
