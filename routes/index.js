@@ -6,6 +6,11 @@ const {
     getThePlace,
     updateThePlace,
     deleteThePlace,
+    createHotels,
+    getTheHotel,
+    getHotels,
+    updateTheHotel,
+    deleteTheHotel,
 } = require("../helpers/api");
 
 // route --- /api/...
@@ -15,5 +20,12 @@ router
     .get(getThePlace)
     .put(updateThePlace)
     .delete(deleteThePlace);
+
+router.route("/places/:placeID/hotels").get(getHotels).post(createHotels);
+router
+    .route("/places/:placeID/hotels/:hotelID")
+    .get(getTheHotel)
+    .put(updateTheHotel)
+    .delete(deleteTheHotel);
 
 module.exports = router;

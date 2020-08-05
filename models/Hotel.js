@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const hotelsSchema = new mongoose.Schema({
-    ration: Number,
+    rating: Number,
     price: Number,
     images: [String],
 });

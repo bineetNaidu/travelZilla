@@ -1,4 +1,5 @@
 const Place = require("../models/Place");
+const Hotel = require("../models/Hotel");
 
 module.exports = {
     getAllPlaces: async (req, res, next) => {
@@ -30,7 +31,9 @@ module.exports = {
         try {
             let place = await Place.findOne({ _id: req.params.placeID });
             if (!place) {
-                return res.send("SOMETHING WENT WRONG WITH THE API");
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
             }
             await res.json(place);
         } catch (error) {
@@ -42,7 +45,9 @@ module.exports = {
         try {
             let place = await Place.findOne({ _id: req.params.placeID });
             if (!place) {
-                return res.send("SOMETHING WENT WRONG WITH THE API");
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
             }
             if (req.body.image) place.image = req.body.image;
             if (req.body.location) place.location = req.body.location;
@@ -64,6 +69,90 @@ module.exports = {
                 .catch(function (err) {
                     res.send(err);
                 });
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }
+    },
+    getHotels: async (req, res, next) => {
+        let place = await Place.findOne({ _id: req.params.placeID })
+            .populate("hotels")
+            .exec();
+        res.json(place);
+    },
+    createHotels: async (req, res, next) => {
+        try {
+            let place = await Place.findOne({ _id: req.params.placeID });
+            if (!place) {
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
+            }
+            let data = {
+                rating: req.body.rating,
+                price: req.body.price,
+                images: req.body.images,
+            };
+            let hotel = await Hotel.create(data);
+            await place.hotels.push(hotel);
+            place.save();
+            res.json(hotel);
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }
+    },
+    getTheHotel: async (req, res, next) => {
+        try {
+            let place = await Place.findOne({ _id: req.params.placeID });
+            if (!place) {
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
+            }
+            let hotel = await Hotel.findOne({ _id: req.params.hotelID });
+            if (!hotel) {
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
+            }
+            res.json(hotel);
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }
+    },
+    updateTheHotel: async (req, res, next) => {
+        try {
+            let place = await Place.findOne({ _id: req.params.placeID });
+            if (!place) {
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
+            }
+            let hotel = await Hotel.findOne({ _id: req.params.hotelID });
+            if (!hotel) {
+                return res.json({
+                    message: "SOMETHING WENT WRONG WITH THE API",
+                });
+            }
+            if (req.body.rating) hotel.rating = req.body.rating;
+            if (req.body.price) hotel.price = req.body.price;
+            if (req.body.images) hotel.images = req.body.images;
+            await hotel.save();
+            res.json(hotel);
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }
+    },
+    deleteTheHotel: async (req, res, next) => {
+        try {
+            await Place.findByIdAndUpdate(req.params.placeID, {
+                $pull: { hotels: req.params.hotelID },
+            });
+            await Hotel.findByIdAndRemove(req.params.hotelID);
+            res.json({ message: "The Hotels data has been deleted" });
         } catch (error) {
             console.log(error);
             res.redirect("/");
