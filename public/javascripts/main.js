@@ -9,6 +9,10 @@ $(document).ready(function () {
     $.getJSON("/api/places")
         .then(addPlaces)
         .catch((error) => console.log(error));
+
+    $.getJSON("/api/hotels")
+        .then(addHotels)
+        .catch((error) => console.log(error));
 });
 
 function addPlaces(places) {
@@ -32,5 +36,24 @@ function addPlaces(places) {
     `;
 
         $(".places .places__card").append(element);
+    }
+}
+
+function addHotels(hotels) {
+    for (const hotel of hotels) {
+        let element = `
+        <div class="hotel__box" data-id="${hotel._id}">
+            <div class="hotel__image" style="background-image: url('${hotel.images[0]})";></div>
+            <div class="hotel__data">
+                <h3>Teh Golder place</h3>
+                <p>Teykjadad</p>
+            </div>
+            <div class="hotel__rating">
+                <i class="fas fa-star"></i>${hotel.rating}
+            </div>
+        </div>
+    `;
+
+        $(".hotels .hotel__cards").append(element);
     }
 }
