@@ -1,3 +1,26 @@
 <% layout('partials/boilerplate') -%>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<div class="holder">
+    <div class="sidebar"></div>
+    <div class="container">
+        <div class="header">
+            <div class="search-box">
+                <div class="sample five">
+                    <input type="text" name="search" placeholder="search" />
+                    <button type="submit" class="btn btn-search">
+                        <i class="fa fa-search fa-flip-horizontal"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="user">
+                <i class="fas fa-caret-down"></i>
+                <div class="user-info">
+                    <h5>Bineet</h5>
+                </div>
+                <div class="drop-menu">
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Logout</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+$mainfont: "Montserrat", sans-serif;
+$mainColor: #ff6e6e;
+$textColor: #3b3b3b;
+$secondaryColor: #fee6e6;
+$primaryColor: #fdf2f2;
+
 *,
 *::before,
 *::after {
@@ -7,10 +14,31 @@
 }
 
 body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: $mainColor;
+    height: 100vh;
+    width: 100%;
+    font-family: $mainfont;
 }
 
-a {
-    color: #00b7ff;
+.holder {
+    width: 100%;
+    display: flex;
+
+    .sidebar {
+        width: 9%;
+        height: 100vh;
+        background: transparent;
+    }
+    .container {
+        width: 91%;
+        height: 100vh;
+        background-color: $secondaryColor;
+        border-bottom-left-radius: 45px;
+        border-top-left-radius: 45px;
+        padding: 2.7rem;
+    }
 }
+
+@import "header";
+
+/* Fonts: Avenir Next */
