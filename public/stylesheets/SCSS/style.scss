@@ -2,7 +2,7 @@
 $mainfont: "Montserrat", sans-serif;
 $mainColor: #ff6e6e;
 $textColor: #3b3b3b;
-$secondaryColor: #fee6e6;
+$secondaryColor: #ffcfcf;
 $primaryColor: #fdf2f2;
 
 *,
@@ -35,10 +35,9 @@ body {
         background-color: $secondaryColor;
         border-bottom-left-radius: 45px;
         border-top-left-radius: 45px;
-        padding: 2.7rem;
+        padding: 2.3rem;
     }
 }
 
 @import "header";
-
-/* Fonts: Avenir Next */
+@import "categories";
