@@ -18,6 +18,11 @@ body {
     height: 100vh;
     width: 100%;
     font-family: $mainfont;
+    color: $textColor;
+}
+a {
+    text-decoration: none;
+    color: $textColor;
 }
 
 .holder {
@@ -41,3 +46,4 @@ body {
 
 @import "header";
 @import "categories";
+@import "places";

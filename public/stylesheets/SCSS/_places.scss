@@ -1,0 +1,58 @@
+.places {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .places__header {
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 0;
+        width: 80%;
+
+        h3 {
+            font-weight: bold;
+
+            span {
+                font-weight: lighter;
+            }
+        }
+        h5 > a {
+            color: $mainColor;
+        }
+    }
+
+    .places__card {
+        display: flex;
+        justify-content: space-around;
+        .place__box {
+            height: 13.5rem;
+            // background-image: url("/images/place.jpg");
+            background-position: center;
+            background-size: cover;
+            width: 12rem;
+            position: relative;
+            border-radius: 20px;
+
+            .place__details {
+                position: absolute;
+                bottom: 15px;
+                left: 12px;
+                width: 85%;
+                color: white;
+
+                h5 {
+                    font-weight: 400;
+                    padding-bottom: 5px;
+                }
+
+                .meta-data {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: small;
+                    opacity: 0.9;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
