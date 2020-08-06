@@ -11,6 +11,7 @@ const {
     getHotels,
     updateTheHotel,
     deleteTheHotel,
+    getAllHotels,
 } = require("../helpers/api");
 
 // route --- /api/...
@@ -21,6 +22,7 @@ router
     .put(updateThePlace)
     .delete(deleteThePlace);
 
+router.get("/hotels", getAllHotels);
 router.route("/places/:placeID/hotels").get(getHotels).post(createHotels);
 router
     .route("/places/:placeID/hotels/:hotelID")

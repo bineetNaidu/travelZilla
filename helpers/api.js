@@ -158,4 +158,8 @@ module.exports = {
             res.redirect("/");
         }
     },
+    getAllHotels: async (req, res, next) => {
+        let hotels = await Hotel.find({});
+        res.json(hotels);
+    },
 };
