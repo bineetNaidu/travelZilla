@@ -24,6 +24,9 @@
     .hotel__cards {
         display: flex;
         justify-content: space-evenly;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-snap-type: none;
 
         .hotel__box {
             display: flex;

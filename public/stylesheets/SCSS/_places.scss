@@ -24,6 +24,10 @@
     .places__card {
         display: flex;
         justify-content: space-around;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-snap-type: none;
+
         .place__box {
             height: 13.5rem;
             // background-image: url("/images/place.jpg");
