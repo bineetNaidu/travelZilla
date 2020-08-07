@@ -21,7 +21,7 @@ module.exports = {
             };
             // console.log(data);
             await Place.create(data);
-            res.redirect("/");
+            res.json(data);
         } catch (error) {
             console.log(error);
             res.redirect("/");
@@ -89,9 +89,13 @@ module.exports = {
                 });
             }
             let data = {
+                name: req.body.name,
                 rating: req.body.rating,
                 price: req.body.price,
+                location: place.location,
                 images: req.body.images,
+                coverImage: req.body.coverImage,
+                description: req.body.description,
             };
             let hotel = await Hotel.create(data);
             await place.hotels.push(hotel);
@@ -136,9 +140,12 @@ module.exports = {
                     message: "SOMETHING WENT WRONG WITH THE API",
                 });
             }
+            if (req.body.name) hotel.name = req.body.name;
             if (req.body.rating) hotel.rating = req.body.rating;
             if (req.body.price) hotel.price = req.body.price;
             if (req.body.images) hotel.images = req.body.images;
+            if (req.body.coverImage) hotel.coverImage = req.body.coverImage;
+            if (req.body.description) hotel.description = req.body.description;
             await hotel.save();
             res.json(hotel);
         } catch (error) {

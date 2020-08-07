@@ -43,17 +43,17 @@ function addHotels(hotels) {
     for (const hotel of hotels) {
         let element = `
         <div class="hotel__box" data-id="${hotel._id}">
-            <div class="hotel__image" style="background-image: url('${hotel.images[0]})";></div>
+            <div class="hotel__image" style="background-image: url('${hotel.coverImage})";></div>
             <div class="hotel__data">
-                <h3>Teh Golder place</h3>
-                <p>Teykjadad</p>
+                <h3>${hotel.name}</h3>
+                <p>${hotel.location}</p>
             </div>
             <div class="hotel__rating">
                 <i class="fas fa-star"></i>${hotel.rating}
             </div>
         </div>
     `;
-
+        console.log(hotel);
         $(".hotels .hotel__cards").append(element);
     }
 }
