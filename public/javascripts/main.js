@@ -57,3 +57,7 @@ function addHotels(hotels) {
         $(".hotels .hotel__cards").append(element);
     }
 }
+
+$("button.dropbtn").on("click", () => {
+    $(".user .drop-content").toggleClass("hide");
+});

@@ -4,49 +4,46 @@
     align-items: end;
 
     .user {
-        background-color: $mainColor;
-        cursor: pointer;
-        display: flex;
-        padding: 8px 1.5rem;
         position: relative;
-        border-radius: 13px;
-        color: white;
-        font-weight: 300;
-        height: 2.2rem;
-        align-items: center;
-
-        h5 {
-            font-weight: 500;
-            padding: 0 0 0 0.5rem;
+        display: inline-block;
+        .dropbtn {
+            width: 10rem;
+            height: 2.2rem;
+            background-color: $mainColor;
+            outline: none;
+            border: 0;
+            border-radius: 20px;
+            font-size: medium;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            align-items: center;
+            i {
+                padding-right: 5px;
+            }
         }
 
-        .drop-menu {
-            color: white;
-            text-decoration: none;
-            position: absolute;
-            top: 2.8rem;
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.3);
-            width: 100%;
-            left: 0;
-            align-items: center;
-            padding: 0 0.8rem;
-            border-radius: 1.1rem;
+        .drop-content.hide {
             opacity: 0;
             pointer-events: none;
+        }
 
-            li {
-                padding: 0.4rem 0;
-                a {
-                    text-decoration: none;
-                    width: 100%;
-                }
+        .drop-content {
+            position: absolute;
+            top: 38px;
+            background: $mainColor;
+            width: 100%;
+            padding: 0.5rem;
+            font-size: smaller;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-                &::hover {
-                    background-color: $mainColor !important;
-                }
+            a {
+                color: white;
+                text-decoration: none;
             }
         }
     }
