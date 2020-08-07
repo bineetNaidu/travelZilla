@@ -13,16 +13,14 @@ $primaryColor: #fdf2f2;
     box-sizing: border-box;
 }
 
-body {
+body,
+html {
     background-color: $mainColor;
     height: 100vh;
     width: 100%;
     font-family: $mainfont;
     color: $textColor;
-}
-a {
-    text-decoration: none;
-    color: $textColor;
+    scroll-behavior: smooth;
 }
 
 .holder {
@@ -33,6 +31,20 @@ a {
         width: 9%;
         height: 100vh;
         background: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        font-size: x-large;
+        color: $secondaryColor;
+
+        a {
+            text-decoration: none;
+            color: $secondaryColor;
+            i {
+                cursor: pointer;
+            }
+        }
     }
     .container {
         width: 91%;
