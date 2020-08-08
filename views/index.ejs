@@ -21,15 +21,20 @@
             </div>
             <div class="user">
                 <button class="dropbtn">
-                    <i class="fas fa-caret-down"></i> Bineet
+                    <i class="fas fa-caret-down"></i>
+                    <% if (user) { %> <%=user%> <% } else { %> NO USER <% } %>
                 </button>
                 <div class="drop-content hide">
-                    <a href="/auth/google"
-                        ><i class="far fa-user-circle"></i> Account</a
-                    >
+                    <% if (user) { %>
+                    <a href="#"><i class="far fa-user-circle"></i> Account</a>
                     <a href="/auth/logout" style="padding-top: 5px;"
                         ><i class="fas fa-sign-out-alt"></i> Logout</a
                     >
+                    <% } else { %>
+                    <a href="/auth/google"
+                        ><i class="fas fa-sign-in-alt"></i>Login</a
+                    >
+                    <% } %>
                 </div>
             </div>
         </div>

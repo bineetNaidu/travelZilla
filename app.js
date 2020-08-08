@@ -58,7 +58,7 @@ app.use(passport.session());
 app.use("/api", apiRouter);
 /* GET home page. */
 app.get("/", (req, res, next) => {
-    res.render("index", { title: "Express" });
+    res.render("index", { title: "Express", user: "" });
 });
 app.use("/auth", authRouters);
 

@@ -17,7 +17,8 @@ router.get(
 
 // cb for google redirect
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-    res.send(req.user);
+    let { firstName } = req.user;
+    res.render("index", { user: firstName });
 });
 
 module.exports = router;
