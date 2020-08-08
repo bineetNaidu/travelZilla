@@ -1,3 +1,4 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -6,8 +7,12 @@ const logger = require("morgan");
 const engine = require("ejs-mate");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
+const passportSetup = require("./config/passoprt-setup");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
 const apiRouter = require("./routes/index");
+const authRouters = require("./routes/auth-routes");
 
 const app = express();
 
@@ -38,6 +43,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
+// auth passport
+app.use(
+    cookieSession({
+        maxAge: 24 * 60 * 60 * 1000, // a day
+        keys: process.env.COOKIE_KEY,
+    })
+);
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // mounting routes
 app.use("/api", apiRouter);
@@ -45,6 +60,7 @@ app.use("/api", apiRouter);
 app.get("/", (req, res, next) => {
     res.render("index", { title: "Express" });
 });
+app.use("/auth", authRouters);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
