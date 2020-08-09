@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Hotel = require("./Hotel");
 
 const placeSchema = new mongoose.Schema({
-    image: [String],
+    images: [String],
+    coverImg: String,
     location: String,
     price: Number,
     hotels: [

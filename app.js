@@ -54,6 +54,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const seedPlaces = require("./seedDB");
+seedPlaces();
+
 // mounting routes
 app.use("/api", apiRouter);
 /* GET home page. */

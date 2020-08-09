@@ -18,7 +18,7 @@ $(document).ready(function () {
 function addPlaces(places) {
     for (const place of places) {
         let element = `
-    <div class="place__box" style="background-image: url('${place.image[0]}");' data-id="${place._id}">
+    <div class="place__box" style="background-image: url('${place.coverImg}");' data-id="${place._id}">
             <div class="place__details">
                 <h5>${place.location}</h5>
                 <div class="meta-data">
