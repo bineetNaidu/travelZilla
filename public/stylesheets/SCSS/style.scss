@@ -19,6 +19,7 @@ html {
     height: 100vh;
     width: 100%;
     font-family: $mainfont;
+    overflow: hidden;
     color: $textColor;
     scroll-behavior: smooth;
 }
@@ -80,3 +81,4 @@ html {
 @import "categories";
 @import "places";
 @import "hotels";
+@import "side-modals";

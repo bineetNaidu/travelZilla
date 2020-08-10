@@ -13,6 +13,26 @@ $(document).ready(function () {
     $.getJSON("/api/hotels")
         .then(addHotels)
         .catch((error) => console.log(error));
+
+    const tl = gsap.timeline({ defaults: { duration: 0.5 } });
+
+    $("button.dropbtn").on("click", () => {
+        $(".user .drop-content").toggleClass("hide");
+    });
+
+    $(".places__card").on("click", ".place__box", function () {
+        let id = this.dataset.id;
+        $.getJSON(`/api/places/${id}/hotels`)
+            .then(addPlaceToSideBar)
+            .catch((error) => console.log(error));
+
+        tl.to(".side-modals", { x: 0, ease: "power1.out" });
+
+        $(".side-modals__header i").on("click", () => {
+            tl.to(".side-modals", { x: "100%", ease: "power1.out" });
+            $("#queries").remove();
+        });
+    });
 });
 
 function addPlaces(places) {
@@ -58,6 +78,25 @@ function addHotels(hotels) {
     }
 }
 
-$("button.dropbtn").on("click", () => {
-    $(".user .drop-content").toggleClass("hide");
-});
+function addPlaceToSideBar(data) {
+    const { location, images, hotels, duration, price } = data;
+    let imgs = [];
+    images.forEach((i) => {
+        let imgTags = `<img src="${i}" />`;
+        imgs.push(imgTags);
+    });
+
+    let element = `
+    <div id="queries">
+        <h2 id="location">${location}</h2>
+        <div id="images"></div>
+        <div id="meta-data">
+            <h5>${price} ${duration}</h5>
+        </div>
+    </div>
+    `;
+    $("#query-box").append(element);
+    for (const imgData of imgs) {
+        $("#images").append(imgData);
+    }
+}

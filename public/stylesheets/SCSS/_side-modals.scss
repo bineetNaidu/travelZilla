@@ -1,0 +1,45 @@
+.side-modals {
+    width: 91%;
+    height: 100vh;
+    background-color: $secondaryColor;
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+    padding: 2.3rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        i {
+            display: flex;
+            align-items: center;
+            font-size: x-large;
+            cursor: pointer;
+        }
+    }
+}
+
+#query-box {
+    #queries {
+        #location,
+        #images,
+        #meta-data {
+            padding: 0 0 2rem 0;
+        }
+
+        #images {
+            display: flex;
+            justify-content: space-around;
+
+            img {
+                width: 25%;
+                height: 220px;
+            }
+        }
+    }
+}
