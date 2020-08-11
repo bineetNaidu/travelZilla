@@ -44,11 +44,11 @@ function addPlaces(places) {
                 <div class="meta-data">
                     <p>
                         <i class="fas fa-briefcase"></i>
-                        ${place.duration} days
+                        ${place.days} days
                     </p>
                     <p>
                         <i class="fas fa-map-pin"></i>
-                        ${place.price}Km
+                        ${place.distance}Km
                     </p>
                 </div>
             </div>
@@ -73,30 +73,79 @@ function addHotels(hotels) {
             </div>
         </div>
     `;
-        console.log(hotel);
         $(".hotels .hotel__cards").append(element);
     }
 }
 
 function addPlaceToSideBar(data) {
-    const { location, images, hotels, duration, price } = data;
-    let imgs = [];
+    // distruct the data
+    const { location, images, hotels, distance, days } = data;
+
+    // get images from arr
+    let imageArray = [];
     images.forEach((i) => {
         let imgTags = `<img src="${i}" />`;
-        imgs.push(imgTags);
+        imageArray.push(imgTags);
     });
 
+    // get hotels
+    let hotelsArray = [];
+    hotels.forEach((hotel) => {
+        const {
+            airConditions,
+            bedrooms,
+            beds,
+            coverImage,
+            description,
+            guests,
+            kitchen,
+            images,
+            location,
+            name,
+            price,
+            rating,
+            wifi,
+            _id: id,
+        } = hotel;
+        let hotelsTag = `
+            <div class="queries__hotels-box" data-id="${id}">
+                <div class="queries__hotels-box__img" style="background-image: url('${coverImage}');"></div>
+                <div class="queries__hotels-box-content">
+                    <h5>${name}</h5>
+                    <hr>
+                    <ul class="queries__hotels-box-content__features">
+                        <li>${guests} guests</li>
+                        <li>${bedrooms} bedrooms</li>
+                        <li>${beds} beds</li>
+                        <li>${wifi} wifi</li>
+                    </ul>
+                    <div class="queries__hotels-box-content__meta-data">
+                        <strong><i class="fas fa-star"></i>${rating}</strong>
+                        <strong>$ ${price}/night</strong>
+                    </div>
+                </div>
+            </div>
+        `;
+        hotelsArray.push(hotelsTag);
+    });
+
+    // create element
     let element = `
     <div id="queries">
-        <h2 id="location">${location}</h2>
-        <div id="images"></div>
-        <div id="meta-data">
-            <h5>${price} ${duration}</h5>
+        <h2 id="location">${location} <span id="meta-data"><i class="fas fa-briefcase"></i> ${days} days  <i class="fas fa-map-pin"></i> ${distance}Km</span></h2>
+        <div id="meta-content">
+            <div id="images"></div>
+            <div id="map"></div>
         </div>
+        <div class="queries__hotels"></div>   
     </div>
     `;
+    // append all the stuff
     $("#query-box").append(element);
-    for (const imgData of imgs) {
+    for (const imgData of imageArray) {
         $("#images").append(imgData);
+    }
+    for (const hoteldata of hotelsArray) {
+        $(".queries__hotels").append(hoteldata);
     }
 }

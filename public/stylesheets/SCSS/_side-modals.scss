@@ -26,19 +26,80 @@
 
 #query-box {
     #queries {
+        overflow-y: auto;
         #location,
-        #images,
-        #meta-data {
+        #images {
             padding: 0 0 2rem 0;
         }
 
-        #images {
-            display: flex;
-            justify-content: space-around;
+        #meta-data {
+            font-size: small;
+            font-weight: 500;
+            padding: 0 0 0 30px;
+        }
 
-            img {
-                width: 25%;
-                height: 220px;
+        #meta-content {
+            display: flex;
+            justify-content: space-between;
+
+            #images {
+                display: flex;
+                flex: 0.5;
+                justify-content: space-evenly;
+                overflow-x: auto;
+
+                img {
+                    width: 30%;
+                    height: 220px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .queries__hotels {
+            display: flex;
+            justify-content: space-evenly;
+
+            &-box {
+                display: flex;
+                height: 12rem;
+                width: 50%;
+                background: aliceblue;
+                justify-content: space-evenly;
+                cursor: pointer;
+
+                &__img {
+                    height: 100%;
+                    width: 50%;
+                    object-fit: cover;
+                    background-position: center;
+                }
+                &-content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    padding: 10px 12px;
+                    width: 90%;
+
+                    hr {
+                        width: 2.5rem;
+                    }
+
+                    &__features {
+                        display: flex;
+                        font-size: smaller;
+                        justify-content: space-evenly;
+                    }
+
+                    &__meta-data {
+                        display: flex;
+                        justify-content: space-between;
+
+                        i {
+                            color: yellow;
+                        }
+                    }
+                }
             }
         }
     }
