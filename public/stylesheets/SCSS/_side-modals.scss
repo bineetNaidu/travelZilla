@@ -104,3 +104,11 @@
         }
     }
 }
+
+.hotels-modals {
+    @extend .side-modals;
+
+    &__header {
+        @extend .side-modals__header;
+    }
+}

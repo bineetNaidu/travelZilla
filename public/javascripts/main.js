@@ -4,7 +4,7 @@ $(".search-box").on("click", "div.five button.btn-search", (event) => {
     let $input = $("div.five input");
     $input.focus();
 });
-
+const tl = gsap.timeline({ defaults: { duration: 0.5 } });
 $(document).ready(function () {
     $.getJSON("/api/places")
         .then(addPlaces)
@@ -13,8 +13,6 @@ $(document).ready(function () {
     $.getJSON("/api/hotels")
         .then(addHotels)
         .catch((error) => console.log(error));
-
-    const tl = gsap.timeline({ defaults: { duration: 0.5 } });
 
     $("button.dropbtn").on("click", () => {
         $(".user .drop-content").toggleClass("hide");
@@ -79,8 +77,7 @@ function addHotels(hotels) {
 
 function addPlaceToSideBar(data) {
     // distruct the data
-    const { location, images, hotels, distance, days } = data;
-
+    const { location, images, hotels, distance, days, _id: placeId } = data;
     // get images from arr
     let imageArray = [];
     images.forEach((i) => {
@@ -105,10 +102,10 @@ function addPlaceToSideBar(data) {
             price,
             rating,
             wifi,
-            _id: id,
+            _id: hotelId,
         } = hotel;
         let hotelsTag = `
-            <div class="queries__hotels-box" data-id="${id}">
+            <div class="queries__hotels-box" data-hotelId="${hotelId}" data-placeId="${placeId}">
                 <div class="queries__hotels-box__img" style="background-image: url('${coverImage}');"></div>
                 <div class="queries__hotels-box-content">
                     <h5>${name}</h5>
@@ -131,11 +128,11 @@ function addPlaceToSideBar(data) {
 
     // create element
     let element = `
-    <div id="queries">
+    <div id="queries" data-placeId="${placeId}">
         <h2 id="location">${location} <span id="meta-data"><i class="fas fa-briefcase"></i> ${days} days  <i class="fas fa-map-pin"></i> ${distance}Km</span></h2>
         <div id="meta-content">
             <div id="images"></div>
-            <div id="map"></div>
+            <div id="place_map"></div>
         </div>
         <div class="queries__hotels"></div>   
     </div>
@@ -148,4 +145,56 @@ function addPlaceToSideBar(data) {
     for (const hoteldata of hotelsArray) {
         $(".queries__hotels").append(hoteldata);
     }
+
+    $(".queries__hotels").on("click", ".queries__hotels-box", function () {
+        const { placeid, hotelid } = this.dataset;
+        $.getJSON(`/api/places/${placeid}/hotels/${hotelid}`)
+            .then(getHotelSidebars)
+            .catch((error) => console.log(error));
+
+        tl.to(".hotels-modals", { x: 0, ease: "power1.out" });
+
+        $(".hotels-modals__header i").on("click", () => {
+            tl.to(".hotels-modals", { x: "100%", ease: "power1.out" });
+            // $("#queries").remove();
+        });
+    });
 }
+
+const getHotelSidebars = function (data) {
+    const {
+        airConditions,
+        bedrooms,
+        beds,
+        coverImage,
+        description,
+        guests,
+        images,
+        kitchen,
+        location,
+        name,
+        price,
+        rating,
+        wifi,
+    } = data;
+
+    let element = `
+    <div id="hotel__query">
+        <p>${airConditions}</p>
+        <p>${bedrooms}</p>
+        <p>${beds}</p>
+        <p>${coverImage}</p>
+        <p>${description}</p>
+        <p>${guests}</p>
+        <p>${images}</p>
+        <p>${kitchen}</p>
+        <p>${location}</p>
+        <p>${name}</p>
+        <p>${price}</p>
+        <p>${rating}</p>
+        <p>${wifi}</p>
+    </div>
+    `;
+
+    $("#hotels-query-box").append(element);
+};
