@@ -8,6 +8,12 @@ const hotelsSchema = new mongoose.Schema({
     coverImage: String,
     description: String,
     images: [String],
+    guests: Number,
+    bedrooms: Number,
+    beds: Number,
+    airConditions: Boolean,
+    kitchen: Boolean,
+    wifi: Boolean,
 });
 
 module.exports = mongoose.model("Hotel", hotelsSchema);

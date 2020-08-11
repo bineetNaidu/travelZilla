@@ -14,10 +14,11 @@ module.exports = {
     createPlace: async (req, res, next) => {
         try {
             let data = {
-                image: req.body.image,
+                images: req.body.image,
+                coverImg: req.body.coverImg,
                 location: req.body.location,
-                price: req.body.price,
-                duration: req.body.duration,
+                days: req.body.days,
+                distance: req.body.distance,
             };
             // console.log(data);
             await Place.create(data);
@@ -49,10 +50,11 @@ module.exports = {
                     message: "SOMETHING WENT WRONG WITH THE API",
                 });
             }
-            if (req.body.image) place.image = req.body.image;
+            if (req.body.images) place.images = req.body.images;
             if (req.body.location) place.location = req.body.location;
-            if (req.body.price) place.price = req.body.price;
-            if (req.body.duration) place.duration = req.body.duration;
+            if (req.body.days) place.days = req.body.days;
+            if (req.body.distance) place.distance = req.body.distance;
+            if (req.body.coverImg) place.coverImg = req.body.coverImg;
             place.save();
             res.json(place);
         } catch (error) {
@@ -96,6 +98,12 @@ module.exports = {
                 images: req.body.images,
                 coverImage: req.body.coverImage,
                 description: req.body.description,
+                guests: req.body.guests,
+                bedrooms: req.body.bedrooms,
+                beds: req.body.beds,
+                airConditions: req.body.airConditions,
+                kitchen: req.body.kitchen,
+                wifi: req.body.wifi,
             };
             let hotel = await Hotel.create(data);
             await place.hotels.push(hotel);
@@ -146,6 +154,13 @@ module.exports = {
             if (req.body.images) hotel.images = req.body.images;
             if (req.body.coverImage) hotel.coverImage = req.body.coverImage;
             if (req.body.description) hotel.description = req.body.description;
+            if (req.body.guests) hotel.guests = req.body.guests;
+            if (req.body.bedrooms) hotel.bedrooms = req.body.bedrooms;
+            if (req.body.beds) hotel.beds = req.body.beds;
+            if (req.body.airConditions)
+                hotel.airConditions = req.body.airConditions;
+            if (req.body.kitchen) hotel.kitchen = req.body.kitchen;
+            if (req.body.wifi) hotel.wifi = req.body.wifi;
             await hotel.save();
             res.json(hotel);
         } catch (error) {
