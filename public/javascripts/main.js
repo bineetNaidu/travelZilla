@@ -156,7 +156,7 @@ function addPlaceToSideBar(data) {
 
         $(".hotels-modals__header i").on("click", () => {
             tl.to(".hotels-modals", { x: "100%", ease: "power1.out" });
-            // $("#queries").remove();
+            $("#hotel__query").remove();
         });
     });
 }
@@ -180,21 +180,42 @@ const getHotelSidebars = function (data) {
 
     let element = `
     <div id="hotel__query">
-        <p>${airConditions}</p>
-        <p>${bedrooms}</p>
-        <p>${beds}</p>
-        <p>${coverImage}</p>
-        <p>${description}</p>
-        <p>${guests}</p>
-        <p>${images}</p>
-        <p>${kitchen}</p>
-        <p>${location}</p>
-        <p>${name}</p>
-        <p>${price}</p>
-        <p>${rating}</p>
-        <p>${wifi}</p>
+        <div id="hotel__query__head">
+            <h2>${name}</h2>
+            <ul id="hotel__query__head__meta">
+                <li>${rating}</li>
+                <li>${location}</li>
+            </ul>
+        </div>
+        <div id="hotel__query__body">
+            <div id="hotel__query__body__images"></div>
+            <div id="hotel__query__body__meta">
+                <div id="hotel__query__body__meta__data">  
+                        <p>${description}</p>
+                        <ul>
+                            <li>${airConditions}</li>
+                            <li>${bedrooms}</li>
+                            <li>${beds}</li>
+                            <li>${guests}</li>
+                            <li>${kitchen}</li>
+                            <li>${wifi}</li>
+                        </ul>    
+                </div> 
+                <div id="hotel__query__body__meta__map"></div> 
+            </div>
+        </div>
     </div>
     `;
 
     $("#hotels-query-box").append(element);
+
+    let imgdata = [];
+    images.forEach((element) => {
+        let IMGTAG = `<img src="${element}" />`;
+        imgdata.push(IMGTAG);
+    });
+
+    for (const i of imgdata) {
+        $("#hotel__query__body__images").append(i);
+    }
 };
