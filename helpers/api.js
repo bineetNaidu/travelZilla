@@ -16,7 +16,7 @@ module.exports = {
             let data = {
                 images: req.body.image,
                 coverImg: req.body.coverImg,
-                location: req.body.location,
+                placeName: req.body.placeName,
                 days: req.body.days,
                 distance: req.body.distance,
             };
@@ -51,7 +51,7 @@ module.exports = {
                 });
             }
             if (req.body.images) place.images = req.body.images;
-            if (req.body.location) place.location = req.body.location;
+            if (req.body.placeName) place.placeName = req.body.placeName;
             if (req.body.days) place.days = req.body.days;
             if (req.body.distance) place.distance = req.body.distance;
             if (req.body.coverImg) place.coverImg = req.body.coverImg;
@@ -94,7 +94,7 @@ module.exports = {
                 name: req.body.name,
                 rating: req.body.rating,
                 price: req.body.price,
-                location: place.location,
+                placeName: place.placeName,
                 images: req.body.images,
                 coverImage: req.body.coverImage,
                 description: req.body.description,

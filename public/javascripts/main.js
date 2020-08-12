@@ -38,7 +38,7 @@ function addPlaces(places) {
         let element = `
     <div class="place__box" style="background-image: url('${place.coverImg}");' data-id="${place._id}">
             <div class="place__details">
-                <h5>${place.location}</h5>
+                <h5>${place.placeName}</h5>
                 <div class="meta-data">
                     <p>
                         <i class="fas fa-briefcase"></i>
@@ -64,7 +64,7 @@ function addHotels(hotels) {
             <div class="hotel__image" style="background-image: url('${hotel.coverImage})";></div>
             <div class="hotel__data">
                 <h3>${hotel.name}</h3>
-                <p>${hotel.location}</p>
+                <p>${hotel.placeName}</p>
             </div>
             <div class="hotel__rating">
                 <i class="fas fa-star"></i>${hotel.rating}
@@ -77,7 +77,15 @@ function addHotels(hotels) {
 
 function addPlaceToSideBar(data) {
     // distruct the data
-    const { location, images, hotels, distance, days, _id: placeId } = data;
+    const {
+        location,
+        images,
+        hotels,
+        distance,
+        days,
+        _id: placeId,
+        placeName,
+    } = data;
     // get images from arr
     let imageArray = [];
     images.forEach((i) => {
@@ -98,6 +106,7 @@ function addPlaceToSideBar(data) {
             kitchen,
             images,
             location,
+            placeName,
             name,
             price,
             rating,
@@ -129,7 +138,7 @@ function addPlaceToSideBar(data) {
     // create element
     let element = `
     <div id="queries" data-placeId="${placeId}">
-        <h2 id="location">${location} <span id="meta-data"><i class="fas fa-briefcase"></i> ${days} days  <i class="fas fa-map-pin"></i> ${distance}Km</span></h2>
+        <h2 id="location">${placeName} <span id="meta-data"><i class="fas fa-briefcase"></i> ${days} days  <i class="fas fa-map-pin"></i> ${distance}Km</span></h2>
         <div id="meta-content">
             <div id="images"></div>
             <div id="place_map"></div>
@@ -172,6 +181,7 @@ const getHotelSidebars = function (data) {
         images,
         kitchen,
         location,
+        placeName,
         name,
         price,
         rating,
@@ -184,7 +194,7 @@ const getHotelSidebars = function (data) {
             <h2>${name}</h2>
             <ul id="hotel__query__head__meta">
                 <li>${rating}</li>
-                <li>${location}</li>
+                <li>${placeName}</li>
             </ul>
         </div>
         <div id="hotel__query__body">

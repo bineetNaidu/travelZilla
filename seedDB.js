@@ -7,7 +7,7 @@ let data = [
             "https://images.unsplash.com/photo-1560235043-5ca64ce84fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
             "https://images.unsplash.com/photo-1582092605233-7f8e5af6f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
         ],
-        location: "Egypt",
+        placeName: "Egypt",
         days: 18,
         distance: 125,
         coverImg:
@@ -18,7 +18,7 @@ let data = [
             "https://images.unsplash.com/photo-1596597312523-cfa839e9e033?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
             "https://images.unsplash.com/photo-1596421138583-fcb22c1a4a2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
         ],
-        location: "Belgium",
+        placeName: "Belgium",
         days: 18,
         distance: 175,
         coverImg:
@@ -29,7 +29,7 @@ let data = [
             "https://images.unsplash.com/photo-1596706269630-8f480cb67f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
             "https://images.unsplash.com/photo-1596542709242-c4449bf48409?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
         ],
-        location: "Spain",
+        placeName: "Spain",
         days: 18,
         distance: 425,
         coverImg:
@@ -39,7 +39,7 @@ let data = [
         images: [
             "https://images.unsplash.com/photo-1596676912754-cc96890420d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
         ],
-        location: "Singapore",
+        placeName: "Singapore",
         distance: 54,
         days: 18,
         coverImg:
@@ -50,13 +50,13 @@ let data = [
 async function seedPlaces() {
     await Place.remove();
     for (let place in data) {
-        let { images, distance, coverImg, location, days } = data[place];
+        let { images, distance, coverImg, placeName, days } = data[place];
         let DATA = {
             images,
             days,
             distance,
             coverImg,
-            location,
+            placeName,
         };
         let p = new Place(DATA);
         await p.save();

@@ -4,7 +4,7 @@ const Hotel = require("./Hotel");
 const placeSchema = new mongoose.Schema({
     images: [String],
     coverImg: String,
-    location: String,
+    placeName: String,
     hotels: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +13,26 @@ const placeSchema = new mongoose.Schema({
     ],
     days: Number,
     distance: Number,
+    location: {
+        type: {
+            type: String,
+            enum: ["Point"],
+        },
+        coordinates: {
+            type: [Number],
+        },
+    },
+});
+
+placeSchema.pre("save", async function (next) {
+    let loc = await geocoder.geocode(this.placeName);
+    this.location = {
+        type: "Point",
+        coordinates: [loc[0].longitude, loc[0].latitude],
+    };
+
+    // go ahead
+    next();
 });
 
 placeSchema.pre("remove", async function () {
