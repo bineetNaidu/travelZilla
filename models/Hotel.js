@@ -6,6 +6,10 @@ const hotelsSchema = new mongoose.Schema({
     rating: Number,
     price: Number,
     placeName: String,
+    address: {
+        type: String,
+        required: [true, "Please add an address"],
+    },
     coverImage: String,
     description: String,
     images: [String],
@@ -24,14 +28,16 @@ const hotelsSchema = new mongoose.Schema({
             type: [Number],
             index: "2dsphere",
         },
+        formattedAddress: String,
     },
 });
 
 hotelsSchema.pre("save", async function (next) {
-    let loc = await geocoder.geocode(this.placeName);
+    let loc = await geocoder.geocode(this.address);
     this.location = {
         type: "Point",
         coordinates: [loc[0].longitude, loc[0].latitude],
+        formattedAddress: loc[0].formattedAddress,
     };
 
     // go ahead

@@ -94,6 +94,7 @@ module.exports = {
                 name: req.body.name,
                 rating: req.body.rating,
                 price: req.body.price,
+                address: req.body.address,
                 placeName: place.placeName,
                 images: req.body.images,
                 coverImage: req.body.coverImage,
@@ -157,6 +158,7 @@ module.exports = {
             if (req.body.guests) hotel.guests = req.body.guests;
             if (req.body.bedrooms) hotel.bedrooms = req.body.bedrooms;
             if (req.body.beds) hotel.beds = req.body.beds;
+            if (req.body.address) hotel.address = req.body.address;
             if (req.body.airConditions)
                 hotel.airConditions = req.body.airConditions;
             if (req.body.kitchen) hotel.kitchen = req.body.kitchen;

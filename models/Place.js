@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Hotel = require("./Hotel");
+const geocoder = require("../utils/geocoder");
 
 const placeSchema = new mongoose.Schema({
     images: [String],

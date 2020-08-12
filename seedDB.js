@@ -1,5 +1,5 @@
 const Place = require("./models/Place");
-
+const Hotel = require("./models/Hotel");
 let data = [
     {
         images: [
@@ -48,6 +48,7 @@ let data = [
 ];
 
 async function seedPlaces() {
+    await Hotel.remove().then(() => console.log("removed hotels"));
     await Place.remove();
     for (let place in data) {
         let { images, distance, coverImg, placeName, days } = data[place];

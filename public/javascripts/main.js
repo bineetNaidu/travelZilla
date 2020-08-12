@@ -193,14 +193,14 @@ const getHotelSidebars = function (data) {
         rating,
         wifi,
     } = data;
-
+    const { formattedAddress } = location;
     let element = `
     <div id="hotel__query">
         <div id="hotel__query__head">
             <h2>${name}</h2>
             <ul id="hotel__query__head__meta">
                 <li>${rating}</li>
-                <li>${placeName}</li>
+                <li>${formattedAddress}</li>
             </ul>
         </div>
         <div id="hotel__query__body">
@@ -238,7 +238,6 @@ const getHotelSidebars = function (data) {
 };
 
 const addMap = (varname, placeholder, { coordinates }) => {
-    console.log(coordinates);
     var varname = new mapboxgl.Map({
         container: placeholder,
         style: "mapbox://styles/mapbox/streets-v11",
