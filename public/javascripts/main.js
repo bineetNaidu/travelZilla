@@ -4,7 +4,12 @@ $(".search-box").on("click", "div.five button.btn-search", (event) => {
     let $input = $("div.five input");
     $input.focus();
 });
+
+// global variables
 const tl = gsap.timeline({ defaults: { duration: 0.5 } });
+mapboxgl.accessToken =
+    "pk.eyJ1IjoiYmluZWV0bmFpZHUiLCJhIjoiY2tjcmRncHN4MG96eDMwbWdyajB1OGJkdiJ9.osACZLXZrpFZ1zSOX7IzHA";
+
 $(document).ready(function () {
     $.getJSON("/api/places")
         .then(addPlaces)
@@ -141,13 +146,14 @@ function addPlaceToSideBar(data) {
         <h2 id="location">${placeName} <span id="meta-data"><i class="fas fa-briefcase"></i> ${days} days  <i class="fas fa-map-pin"></i> ${distance}Km</span></h2>
         <div id="meta-content">
             <div id="images"></div>
-            <div id="place_map"></div>
+            <div id="place_map" style="width: 500px; height: 250px"></div>
         </div>
         <div class="queries__hotels"></div>   
     </div>
     `;
     // append all the stuff
     $("#query-box").append(element);
+    addMap("mapPlace", "place_map", location);
     for (const imgData of imageArray) {
         $("#images").append(imgData);
     }
@@ -211,13 +217,14 @@ const getHotelSidebars = function (data) {
                             <li>${wifi}</li>
                         </ul>    
                 </div> 
-                <div id="hotel__query__body__meta__map"></div> 
+                <div id="hotel__query__body__meta__map" style='width: 500px; height: 250px;'></div> 
             </div>
         </div>
     </div>
     `;
 
     $("#hotels-query-box").append(element);
+    addMap("mapHotel", "hotel__query__body__meta__map", location);
 
     let imgdata = [];
     images.forEach((element) => {
@@ -228,4 +235,14 @@ const getHotelSidebars = function (data) {
     for (const i of imgdata) {
         $("#hotel__query__body__images").append(i);
     }
+};
+
+const addMap = (varname, placeholder, { coordinates }) => {
+    console.log(coordinates);
+    var varname = new mapboxgl.Map({
+        container: placeholder,
+        style: "mapbox://styles/mapbox/streets-v11",
+        zoom: 9,
+        center: coordinates,
+    });
 };
