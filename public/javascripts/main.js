@@ -1,16 +1,16 @@
-// actions
-$(".search-box").on("click", "div.five button.btn-search", (event) => {
-    event.preventDefault();
-    let $input = $("div.five input");
-    $input.focus();
-});
-
 // global variables
 const tl = gsap.timeline({ defaults: { duration: 0.5 } });
 mapboxgl.accessToken =
     "pk.eyJ1IjoiYmluZWV0bmFpZHUiLCJhIjoiY2tjcmRncHN4MG96eDMwbWdyajB1OGJkdiJ9.osACZLXZrpFZ1zSOX7IzHA";
 
 $(document).ready(function () {
+    // actions
+    $(".search-box").on("click", "div.five button.btn-search", (event) => {
+        event.preventDefault();
+        let $input = $("div.five input");
+        $input.focus();
+    });
+
     $.getJSON("/api/places")
         .then(addPlaces)
         .catch((error) => console.log(error));
@@ -29,10 +29,10 @@ $(document).ready(function () {
             .then(addPlaceToSideBar)
             .catch((error) => console.log(error));
 
-        tl.to(".side-modals", { x: 0, ease: "power1.out" });
+        tlAnime(".side-modals", 0);
 
         $(".side-modals__header i").on("click", () => {
-            tl.to(".side-modals", { x: "100%", ease: "power1.out" });
+            tlAnime(".side-modals", "100%");
             $("#queries").remove();
         });
     });
@@ -80,65 +80,24 @@ function addHotels(hotels) {
     }
 }
 
-function addPlaceToSideBar(data) {
-    // distruct the data
-    const {
-        location,
-        images,
-        hotels,
-        distance,
-        days,
-        _id: placeId,
-        placeName,
-    } = data;
+function addPlaceToSideBar({
+    location,
+    images,
+    hotels,
+    distance,
+    days,
+    _id: placeId,
+    placeName,
+}) {
     // get images from arr
     let imageArray = [];
     images.forEach((i) => {
         let imgTags = `<img src="${i}" />`;
         imageArray.push(imgTags);
     });
-
     // get hotels
     let hotelsArray = [];
-    hotels.forEach((hotel) => {
-        const {
-            airConditions,
-            bedrooms,
-            beds,
-            coverImage,
-            description,
-            guests,
-            kitchen,
-            images,
-            location,
-            placeName,
-            name,
-            price,
-            rating,
-            wifi,
-            _id: hotelId,
-        } = hotel;
-        let hotelsTag = `
-            <div class="queries__hotels-box" data-hotelId="${hotelId}" data-placeId="${placeId}">
-                <div class="queries__hotels-box__img" style="background-image: url('${coverImage}');"></div>
-                <div class="queries__hotels-box-content">
-                    <h5>${name}</h5>
-                    <hr>
-                    <ul class="queries__hotels-box-content__features">
-                        <li>${guests} guests</li>
-                        <li>${bedrooms} bedrooms</li>
-                        <li>${beds} beds</li>
-                        <li>${wifi} wifi</li>
-                    </ul>
-                    <div class="queries__hotels-box-content__meta-data">
-                        <strong><i class="fas fa-star"></i>${rating}</strong>
-                        <strong>$ ${price}/night</strong>
-                    </div>
-                </div>
-            </div>
-        `;
-        hotelsArray.push(hotelsTag);
-    });
+    sidebarPlaceHotelsTag(hotels, placeId, hotelsArray);
 
     // create element
     let element = `
@@ -167,32 +126,56 @@ function addPlaceToSideBar(data) {
             .then(getHotelSidebars)
             .catch((error) => console.log(error));
 
-        tl.to(".hotels-modals", { x: 0, ease: "power1.out" });
+        tlAnime(".hotels-modals", 0);
 
         $(".hotels-modals__header i").on("click", () => {
-            tl.to(".hotels-modals", { x: "100%", ease: "power1.out" });
+            tlAnime(".hotels-modals", "100%");
             $("#hotel__query").remove();
         });
     });
 }
 
 const getHotelSidebars = function (data) {
-    const {
-        airConditions,
-        bedrooms,
-        beds,
-        coverImage,
-        description,
-        guests,
-        images,
-        kitchen,
-        location,
-        placeName,
-        name,
-        price,
-        rating,
-        wifi,
-    } = data;
+    sidebarHotel(data).then((res) => {
+        const [element, images, location] = res;
+        $("#hotels-query-box").append(element);
+        addMap("mapHotel", "hotel__query__body__meta__map", location);
+
+        let imgdata = [];
+        images.forEach((i) => {
+            let IMGTAG = `<img src="${i}" />`;
+            imgdata.push(IMGTAG);
+        });
+
+        for (const i of imgdata) {
+            $("#hotel__query__body__images").append(i);
+        }
+    });
+};
+
+const addMap = (varname, placeholder, { coordinates }) => {
+    varname = new mapboxgl.Map({
+        container: placeholder,
+        style: "mapbox://styles/mapbox/streets-v11",
+        zoom: 9,
+        center: coordinates,
+    });
+};
+
+const sidebarHotel = ({
+    airConditions,
+    bedrooms,
+    beds,
+    description,
+    guests,
+    images,
+    kitchen,
+    location,
+    name,
+    price,
+    rating,
+    wifi,
+}) => {
     const { formattedAddress } = location;
     let element = `
     <div id="hotel__query">
@@ -222,26 +205,48 @@ const getHotelSidebars = function (data) {
         </div>
     </div>
     `;
-
-    $("#hotels-query-box").append(element);
-    addMap("mapHotel", "hotel__query__body__meta__map", location);
-
-    let imgdata = [];
-    images.forEach((element) => {
-        let IMGTAG = `<img src="${element}" />`;
-        imgdata.push(IMGTAG);
-    });
-
-    for (const i of imgdata) {
-        $("#hotel__query__body__images").append(i);
-    }
+    let res = [element, images, location];
+    return Promise.resolve(res);
 };
 
-const addMap = (varname, placeholder, { coordinates }) => {
-    var varname = new mapboxgl.Map({
-        container: placeholder,
-        style: "mapbox://styles/mapbox/streets-v11",
-        zoom: 9,
-        center: coordinates,
-    });
+const sidebarPlaceHotelsTag = (hotels, placeId, arr) => {
+    hotels.forEach(
+        ({
+            bedrooms,
+            beds,
+            coverImage,
+            guests,
+            name,
+            price,
+            rating,
+            wifi,
+            _id: hotelId,
+        }) => {
+            let hotelsTag = `
+            <div class="queries__hotels-box" data-hotelId="${hotelId}" data-placeId="${placeId}">
+                <div class="queries__hotels-box__img" style="background-image: url('${coverImage}');"></div>
+                <div class="queries__hotels-box-content">
+                    <h5>${name}</h5>
+                    <hr>
+                    <ul class="queries__hotels-box-content__features">
+                        <li>${guests} guests</li>
+                        <li>${bedrooms} bedrooms</li>
+                        <li>${beds} beds</li>
+                        <li>${wifi} wifi</li>
+                    </ul>
+                    <div class="queries__hotels-box-content__meta-data">
+                        <strong><i class="fas fa-star"></i>${rating}</strong>
+                        <strong>$ ${price}/night</strong>
+                    </div>
+                </div>
+            </div>
+        `;
+            arr.push(hotelsTag);
+        }
+    );
+    return arr;
 };
+
+function tlAnime(target, x) {
+    tl.to(target, { x, ease: "power1.out" });
+}
