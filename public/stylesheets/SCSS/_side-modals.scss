@@ -44,7 +44,7 @@
 
             #images {
                 display: flex;
-                flex: 0.5;
+                flex: 1;
                 justify-content: space-evenly;
                 overflow-x: auto;
 
@@ -59,11 +59,12 @@
         .queries__hotels {
             display: flex;
             justify-content: space-evenly;
+            margin-top: 2rem;
 
             &-box {
                 display: flex;
-                height: 12rem;
-                width: 50%;
+                height: 10rem;
+                width: 45%;
                 background: aliceblue;
                 justify-content: space-evenly;
                 cursor: pointer;
@@ -116,7 +117,7 @@
             &__head__meta {
                 display: flex;
                 justify-content: space-between;
-                width: 15%;
+                width: 20%;
             }
 
             &__body {
@@ -149,9 +150,13 @@
 
                     &__data {
                         flex-direction: column;
-
+                        padding: 10px;
+                        h4 {
+                            padding: 5px 0;
+                        }
                         ul {
                             list-style: none;
+                            width: 100%;
                         }
                     }
                 }

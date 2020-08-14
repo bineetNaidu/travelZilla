@@ -191,13 +191,14 @@ const sidebarHotel = ({
             <div id="hotel__query__body__meta">
                 <div id="hotel__query__body__meta__data">  
                         <p>${description}</p>
+                        <h4>Features</h4>
                         <ul>
-                            <li>${airConditions}</li>
-                            <li>${bedrooms}</li>
-                            <li>${beds}</li>
-                            <li>${guests}</li>
-                            <li>${kitchen}</li>
-                            <li>${wifi}</li>
+                            <li>AC :  ${airConditions ? "yes" : "no"}</li>
+                            <li>Bedsrooms : ${bedrooms}</li>
+                            <li>Beds :  ${beds}</li>
+                            <li>Guests :  ${guests}</li>
+                            <li>Kitchen :  ${kitchen ? "yes" : "no"}</li>
+                            <li>Wifi :  ${wifi ? "yes" : "no"}</li>
                         </ul>    
                 </div> 
                 <div id="hotel__query__body__meta__map" style='width: 500px; height: 250px;'></div> 

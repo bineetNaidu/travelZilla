@@ -3,47 +3,47 @@ const Hotel = require("./models/Hotel");
 let data = [
     {
         images: [
-            "https://images.unsplash.com/photo-1527347012399-57712bb5157c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1560235043-5ca64ce84fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1582092605233-7f8e5af6f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+            "https://bit.ly/3h869q4",
+            "https://bit.ly/2DR5kDT",
+            "https://bit.ly/3gXFHPY",
         ],
-        placeName: "Egypt",
-        days: 18,
-        distance: 125,
-        coverImg:
-            "https://images.unsplash.com/photo-1596636478939-59fed7a083f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        placeName: "Bangalore IN",
+        days: 24,
+        distance: 325,
+        coverImg: "https://bit.ly/2Fos4LX",
     },
     {
         images: [
-            "https://images.unsplash.com/photo-1596597312523-cfa839e9e033?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1596421138583-fcb22c1a4a2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+            "https://bit.ly/3aoB5jl",
+            "https://bit.ly/33XkVMJ",
+            "https://bit.ly/3g3XjbX",
         ],
-        placeName: "Belgium",
+        placeName: "West Bengal IN",
         days: 18,
-        distance: 175,
-        coverImg:
-            "https://images.unsplash.com/photo-1596701572669-dfec5e958796?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        distance: 275,
+        coverImg: "https://bit.ly/33ZZcnC",
     },
     {
         images: [
-            "https://images.unsplash.com/photo-1596706269630-8f480cb67f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1596542709242-c4449bf48409?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+            "https://bit.ly/3iDaW3k",
+            "https://bit.ly/2Fl6W9f",
+            "https://bit.ly/2CrFc1N",
         ],
-        placeName: "Spain",
-        days: 18,
-        distance: 425,
-        coverImg:
-            "https://images.unsplash.com/photo-1596708612369-29f5ca3a3ad9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        placeName: "Rajasthan IN",
+        days: 12,
+        distance: 155,
+        coverImg: "https://bit.ly/3gXs8Qu",
     },
     {
         images: [
-            "https://images.unsplash.com/photo-1596676912754-cc96890420d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+            "https://bit.ly/3apgoE1",
+            "https://bit.ly/30XnE7c",
+            "https://bit.ly/2DKKyWC",
         ],
-        placeName: "Singapore",
-        distance: 54,
-        days: 18,
-        coverImg:
-            "https://images.unsplash.com/photo-1522521976874-e5d7c6b90db3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        placeName: "New Delhi IN",
+        distance: 84,
+        days: 8,
+        coverImg: "https://bit.ly/2PTbTIk",
     },
 ];
 
